@@ -4,14 +4,20 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 const Schema = mongoose.Schema;
 const personSchema = new Schema({
   name: { type: String, required: true },
-  age: Number,
+  age: {type:Number,required:true},
   favoriteFoods: [String]
 });
 
 const Person = mongoose.model("Person",personSchema)
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  var chase = new Person({name:"Chase",age:20,favoriteFoods:["Steak"]})
+  chase.save(function(err,data){
+    if(err){
+      return console.log(err)
+    }
+    done(null,data)
+  })
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
