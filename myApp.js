@@ -20,12 +20,18 @@ const createAndSavePerson = (done) => {
   })
 };
 
+var arrayOfPeople = [
+  {name:Nick,age:10,favoriteFoods:[]},
+  {name:Bubu,age:25,favoriteFoods:[]},
+  {name:Mam,age:21,favoriteFoods:[]}
+]
+
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(function(err,arrayOfPeople){
+  Person.create(arrayOfPeople,function(err,people){
     if(err){
       return console.log(err)
     }
-    done(arrayOfPeople)
+    done(null,people)
   })
 };
 
