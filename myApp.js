@@ -109,7 +109,7 @@ const queryChain = (done) => {
   .select({age:0})
   .exec(function(error, people) {
     if(error) return console.log(error);
-    done(null,people)
+    console.log(people)
   });
 };
 
