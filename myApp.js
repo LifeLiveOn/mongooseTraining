@@ -43,10 +43,10 @@ var findPeopleByName = function(personName, done) {
   });
 };
 
-const findOneByFood = (food, done) => {
-  Person.findOne({FavoriteFoods:food},function (err,person){
+const findOneByFood = function(food, done) {
+  Person.findOne({FavoriteFoods:food},function (err,person) {
     if(err) return console.log(err);
-    done(null,person)
+    done(null, person);
   })
 };
 
