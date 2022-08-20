@@ -8,15 +8,23 @@ const personSchema = new Schema({
   favoriteFoods: [String]
 });
 
-let Person;
+const Person = mongoose.model("Person",personSchema)
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  var chase = new Person({name:"Chase",age:20,favoriteFoods:["Steak"]})
+  chase.save(function(err,data){
+    if(err){
+      return console.log(err)
+    }
+    done(null,data)
+  })
 };
 
-const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
-};
+var arrayOfPeople = [
+  {name:"Nick",age:10,favoriteFoods:[]},
+  {name:"Bubu",age:25,favoriteFoods:[]},
+  {name:"Mam",age:21,favoriteFoods:[]}
+]
 
 const findPeopleByName = (personName, done) => {
   Person.find({name: personName}, function(err, data){
