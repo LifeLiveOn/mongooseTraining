@@ -108,7 +108,7 @@ const queryChain = (done) => {
   .limit(2)
   .select({ name: 1,age:0,favoriteFoods:1 })
   .exec(function(error, people) {
-    if(error) return console.log(err);
+    if(error) return console.log(error);
     done(null,people)
   });
 };
