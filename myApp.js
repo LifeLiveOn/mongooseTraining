@@ -44,9 +44,9 @@ var findPeopleByName = function(personName, done) {
 };
 
 var findOneByFood = function(food, done) {
-  Person.findOne({FavoriteFoods:food},function (err,person) {
-    if(err) return console.log(err);
-    done(null, person);
+  Person.findOne({favoriteFoods: food}, function (err, data) {
+    if (err) return console.log(err);
+    done(null, data);
   });
 };
 
