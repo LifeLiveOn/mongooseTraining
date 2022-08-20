@@ -26,7 +26,7 @@ var arrayOfPeople = [
   {name:"Mam",age:21,favoriteFoods:[]}
 ]
 
-const findPeopleByName = (personName, done) => {
+const findPeopleByName = function(personName, done){
   Person.find({name: personName}, function(err, data){
     if(err) return console.log(err);
     done(null, data);
