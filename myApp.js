@@ -28,8 +28,8 @@ var arrayOfPeople = [
 
 const findPeopleByName = (personName, done) => {
   Person.find({name: personName}, function(err, data){
-    if(err){console.log(err)}
-    done(null, data)
+    if(err) return console.log(err);
+    done(null, data);
   })
 };
 
