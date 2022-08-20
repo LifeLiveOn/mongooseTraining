@@ -1,36 +1,46 @@
 require('dotenv').config();
-var mongoose = require('mongoose')
+
+const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-const Schema = mongoose.Schema;
-const personSchema = new Schema({
-  name: { type: String, required: true },
-  age: {type:Number,required:true},
+/** 2) Create a 'Person' Model */
+var personSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
   favoriteFoods: [String]
 });
 
-const Person = mongoose.model("Person",personSchema)
+/** 3) Create and Save a Person */
+var Person = mongoose.model('Person', personSchema);
 
-const createAndSavePerson = (done) => {
-  var chase = new Person({name:"Chase",age:20,favoriteFoods:["Steak"]})
-  chase.save(function(err,data){
-    if(err){
-      return console.log(err)
-    }
-    done(null,data)
-  })
+var createAndSavePerson = function(done) {
+  var janeFonda = new Person({name: "Jane Fonda", age: 84, favoriteFoods: ["eggs", "fish", "fresh fruit"]});
+
+  janeFonda.save(function(err, data) {
+    if (err) return console.error(err);
+    done(null, data)
+  });
 };
 
+/** 4) Create many People with `Model.create()` */
 var arrayOfPeople = [
-  {name:"Nick",age:10,favoriteFoods:[]},
-  {name:"Bubu",age:25,favoriteFoods:[]},
-  {name:"Mam",age:21,favoriteFoods:[]}
-]
+  {name: "Frankie", age: 74, favoriteFoods: ["Del Taco"]},
+  {name: "Sol", age: 76, favoriteFoods: ["roast chicken"]},
+  {name: "Robert", age: 78, favoriteFoods: ["wine"]}
+];
 
-const findPeopleByName = function(personName, done){
-  Person.find({name: personName}, function(err, data){
-    if(err) return console.log(err);
-    done(null, data);
-  })
+var createManyPeople = function(arrayOfPeople, done) {
+  Person.create(arrayOfPeople, function (err, people) {
+    if (err) return console.log(err);
+    done(null, people);
+  });
+};
+
+/** 5) Use `Model.find()` */
+var findPeopleByName = function(personName, done) {
+  Person.find({name: personName}, function (err, personFound) {
+    if (err) return console.log(err);
+    done(null, personFound);
+  });
 };
 
 const findOneByFood = (food, done) => {
